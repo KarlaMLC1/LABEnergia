@@ -1,0 +1,327 @@
+// Definimos los pines para los LEDs
+const int pinRojo = RED_LED;
+const int pinVerde = GREEN_LED;
+
+//Pines de Botones 
+const int Boton = PUSH2; 
+const int BotonJ1 = PD_0; 
+const int BotonJ2 = PD_1;  
+
+//Leds Jugador1
+const int J11= PB_5; 
+const int J12= PB_0; 
+const int J13= PB_1; 
+const int J14= PE_4; 
+const int J15= PA_5; 
+const int J16= PA_6; 
+const int J17= PA_7; 
+const int J18= PF_1; 
+
+//Leds Jugador2
+const int J21= PB_5; 
+const int J22= PB_0; 
+const int J23= PB_1; 
+const int J24= PE_4; 
+const int J25= PA_5; 
+const int J26= PA_6; 
+const int J27= PA_7; 
+const int J28= PF_1; 
+
+//Led que indica ganador 
+const int LEDF= PF_2;
+
+
+
+void setup() {
+  // Configuramos los pines como salidas
+  pinMode(pinRojo, OUTPUT);
+  pinMode(pinVerde, OUTPUT);
+  pinMode(J11, OUTPUT);
+  pinMode(J12, OUTPUT);
+  pinMode(J13, OUTPUT);
+  pinMode(J14, OUTPUT);
+  pinMode(J15, OUTPUT);
+  pinMode(J16, OUTPUT);
+  pinMode(J17, OUTPUT);
+  pinMode(J18, OUTPUT);
+  pinMode(J21, OUTPUT);
+  pinMode(J22, OUTPUT);
+  pinMode(J23, OUTPUT);
+  pinMode(J24, OUTPUT);
+  pinMode(J25, OUTPUT);
+  pinMode(J26, OUTPUT);
+  pinMode(J27, OUTPUT);
+  pinMode(J28, OUTPUT);
+  pinMode(LEDF, OUTPUT);
+  //Botones como entradas
+  pinMode(Boton, INPUT_PULLUP);
+  pinMode(BotonJ1, INPUT_PULLUP);
+  pinMode(BotonJ2, INPUT_PULLUP);
+}
+
+
+   int Cont1 = 0;
+   int Cont2 = 0;
+   unsigned long lastDebounceTime = 0;  // Tiempo del último cambio de estado del botón
+   unsigned long debounceDelay = 50;   // Tiempo de debounce (ajusta según sea necesario)
+
+   //Rutina de incremento jugador 1
+void incrementar (){
+  
+   bool LecJ1 = digitalRead(BotonJ1);
+
+  if (millis() - lastDebounceTime > debounceDelay) {
+    if (LecJ1 == LOW) {
+      Cont1++;
+      while (!digitalRead(BotonJ1));
+    }
+    lastDebounceTime = millis();
+  }
+
+  switch (Cont1) {
+  case 1:
+    digitalWrite(J11, HIGH);
+    digitalWrite(J12, LOW);
+    digitalWrite(J13, LOW);
+    digitalWrite(J14, LOW);
+    digitalWrite(J15, LOW);
+    digitalWrite(J16, LOW);
+    digitalWrite(J17, LOW);
+    digitalWrite(J18, LOW);
+    break;
+  case 2:
+    digitalWrite(J11, LOW);
+    digitalWrite(J12, HIGH);
+    digitalWrite(J13, LOW);
+    digitalWrite(J14, LOW);
+    digitalWrite(J15, LOW);
+    digitalWrite(J16, LOW);
+    digitalWrite(J17, LOW);
+    digitalWrite(J18, LOW);
+    break;
+  case 3:
+    digitalWrite(J11, LOW);
+    digitalWrite(J12, LOW);
+    digitalWrite(J13, HIGH);
+    digitalWrite(J14, LOW);
+    digitalWrite(J15, LOW);
+    digitalWrite(J16, LOW);
+    digitalWrite(J17, LOW);
+    digitalWrite(J18, LOW);
+    break;
+  case 4:
+    digitalWrite(J11, LOW);
+    digitalWrite(J12, LOW);
+    digitalWrite(J13, LOW);
+    digitalWrite(J14, HIGH);
+    digitalWrite(J15, LOW);
+    digitalWrite(J16, LOW);
+    digitalWrite(J17, LOW);
+    digitalWrite(J18, LOW);
+    break;
+  case 5:
+    digitalWrite(J11, LOW);
+    digitalWrite(J12, LOW);
+    digitalWrite(J13, LOW);
+    digitalWrite(J14, LOW);
+    digitalWrite(J15, HIGH);
+    digitalWrite(J16, LOW);
+    digitalWrite(J17, LOW);
+    digitalWrite(J18, LOW);
+    break;
+  case 6:
+    digitalWrite(J11, LOW);
+    digitalWrite(J12, LOW);
+    digitalWrite(J13, LOW);
+    digitalWrite(J14, LOW);
+    digitalWrite(J15, LOW);
+    digitalWrite(J16, HIGH);
+    digitalWrite(J17, LOW);
+    digitalWrite(J18, LOW);
+    break;
+  case 7:
+    digitalWrite(J11, LOW);
+    digitalWrite(J12, LOW);
+    digitalWrite(J13, LOW);
+    digitalWrite(J14, LOW);
+    digitalWrite(J15, LOW);
+    digitalWrite(J16, LOW);
+    digitalWrite(J17, HIGH);
+    digitalWrite(J18, LOW);
+    break;
+  case 8:
+    digitalWrite(J11, HIGH);
+    digitalWrite(J12, HIGH);
+    digitalWrite(J13, HIGH);
+    digitalWrite(J14, HIGH);
+    digitalWrite(J15, HIGH);
+    digitalWrite(J16, HIGH);
+    digitalWrite(J17, HIGH);
+    digitalWrite(J18, HIGH);
+}  
+}
+
+   //Rutina de incremento jugador 2
+void incrementar2 (){
+  
+  bool LecJ2 = digitalRead(BotonJ2);
+
+  if (millis() - lastDebounceTime > debounceDelay) {
+    if (LecJ2 == LOW) {
+      Cont2++;
+      while (!digitalRead(BotonJ2));
+    }
+    lastDebounceTime = millis();
+  }
+
+  switch (Cont2) {
+  case 1:
+    digitalWrite(J21, HIGH);
+    digitalWrite(J22, LOW);
+    digitalWrite(J23, LOW);
+    digitalWrite(J24, LOW);
+    digitalWrite(J25, LOW);
+    digitalWrite(J26, LOW);
+    digitalWrite(J27, LOW);
+    digitalWrite(J28, LOW);
+    break;
+  case 2:
+    digitalWrite(J21, LOW);
+    digitalWrite(J22, HIGH);
+    digitalWrite(J23, LOW);
+    digitalWrite(J24, LOW);
+    digitalWrite(J25, LOW);
+    digitalWrite(J26, LOW);
+    digitalWrite(J27, LOW);
+    digitalWrite(J28, LOW);
+    break;
+  case 3:
+    digitalWrite(J21, LOW);
+    digitalWrite(J22, LOW);
+    digitalWrite(J23, HIGH);
+    digitalWrite(J24, LOW);
+    digitalWrite(J25, LOW);
+    digitalWrite(J26, LOW);
+    digitalWrite(J27, LOW);
+    digitalWrite(J28, LOW);
+    break;
+  case 4:
+    digitalWrite(J21, LOW);
+    digitalWrite(J22, LOW);
+    digitalWrite(J23, LOW);
+    digitalWrite(J24, HIGH);
+    digitalWrite(J25, LOW);
+    digitalWrite(J26, LOW);
+    digitalWrite(J27, LOW);
+    digitalWrite(J28, LOW);
+    break;
+  case 5:
+    digitalWrite(J21, LOW);
+    digitalWrite(J22, LOW);
+    digitalWrite(J23, LOW);
+    digitalWrite(J24, LOW);
+    digitalWrite(J25, HIGH);
+    digitalWrite(J26, LOW);
+    digitalWrite(J27, LOW);
+    digitalWrite(J28, LOW);
+    break;
+  case 6:
+    digitalWrite(J21, LOW);
+    digitalWrite(J22, LOW);
+    digitalWrite(J23, LOW);
+    digitalWrite(J24, LOW);
+    digitalWrite(J25, LOW);
+    digitalWrite(J26, HIGH);
+    digitalWrite(J27, LOW);
+    digitalWrite(J28, LOW);
+    break;
+  case 7:
+    digitalWrite(J21, LOW);
+    digitalWrite(J22, LOW);
+    digitalWrite(J23, LOW);
+    digitalWrite(J24, LOW);
+    digitalWrite(J25, LOW);
+    digitalWrite(J26, LOW);
+    digitalWrite(J27, HIGH);
+    digitalWrite(J28, LOW);
+    break;
+  case 8:
+    digitalWrite(J21, HIGH);
+    digitalWrite(J22, HIGH);
+    digitalWrite(J23, HIGH);
+    digitalWrite(J24, HIGH);
+    digitalWrite(J25, HIGH);
+    digitalWrite(J26, HIGH);
+    digitalWrite(J27, HIGH);
+    digitalWrite(J28, HIGH);
+}  
+}
+
+
+//Rutina de comparación de contadores para ver el ganador 
+void Comparacion(){
+  if(Cont1>7){
+    digitalWrite(LEDF, HIGH);
+    digitalWrite(J21, LOW);
+    digitalWrite(J22, LOW);
+    digitalWrite(J23, LOW);
+    digitalWrite(J24, LOW);
+    digitalWrite(J25, LOW);
+    digitalWrite(J26, LOW);
+    digitalWrite(J27, LOW);
+    digitalWrite(J28, LOW);
+    Cont2=0;
+    
+    
+  }  if(Cont2>7){
+    digitalWrite(LEDF, HIGH);
+    digitalWrite(J11, LOW);
+    digitalWrite(J12, LOW);
+    digitalWrite(J13, LOW);
+    digitalWrite(J14, LOW);
+    digitalWrite(J15, LOW);
+    digitalWrite(J16, LOW);
+    digitalWrite(J17, LOW);
+    digitalWrite(J18, LOW);
+    Cont1=0;
+  }
+  else{
+    digitalWrite(LEDF, LOW);
+  }
+}
+
+//Loop Principal
+void loop() {
+  bool b1 = digitalRead(Boton);
+  incrementar(); 
+  incrementar2(); 
+  Comparacion();
+  
+  if (!b1){
+ 
+    // Encendemos el LED verde 
+    digitalWrite(pinVerde, HIGH);
+    digitalWrite(pinRojo, LOW);
+    delay(2000);  // Esperamos 5 segundos
+  
+    // Apagamos el verde y encendemos el amarillo 
+    digitalWrite(pinVerde, HIGH);
+    digitalWrite(pinRojo, HIGH);
+    delay(2000);  // Esperamos 2 segundos
+  
+    // Apagamos el amarillo y encendemos el rojo 
+    digitalWrite(pinVerde, LOW);
+    digitalWrite(pinRojo, HIGH);
+    delay(2000);  // Esperamos 5 segundos
+
+
+
+  }
+  else {
+    digitalWrite(pinVerde, LOW);
+    digitalWrite(pinRojo, LOW);
+  }
+
+ 
+
+}
